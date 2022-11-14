@@ -1,5 +1,5 @@
-const {app, BrowserWindow} = require('electron')
-
+const {app, BrowserWindow} = require('electron');
+const server=require("./app.js");
 let mainWindow
 
 function createWindow () {

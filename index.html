@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Node.js Desktop Application Template</title>
+  <title>File Transfer from  Mobile to PC</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,13 +29,18 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Node.js Desktop Application Template</h1>
-        <p class="lead">Built on Node.jS, Electron and Bootstrap.</p>
+        <h1 class="mt-5">File Transfer from  Mobile to PC</h1>
+        <p class="lead">Follow the steps below to Transfer</p>
         <ul class="list-unstyled">
-          <li>Bootstrap 4.2.1</li>
-          <li>jQuery 3.3.1</li>
-          <li>Node 9.4.0</li>
-          <li>Electron 4.0.4</li>
+          <li>1.Connect your Mobile and PC with same Wi-Fi or Same network</li>
+          <li>2.Open browser in Mobile</li>
+          <li>3.Goto <b>&lt;IP address shown in below&gt;:4000</b></li>
+          <li>example  192.168.29.124:4000</li>
+          <h3 style="color: red">Both device must Connect to the same network</h3>
+        </ul>
+        <h1>Available Local IP address are:</h1>
+        <ul id="ip4" style="list-style: none">
+        
         </ul>
       </div>
     </div>
@@ -47,6 +52,21 @@
   <script>
     //load in node libraries
     require('./renderer.js')
+    const server=require('./app.js');
+    var os=require('os');
+var ifaces=os.networkInterfaces();
+
+for (var dev in ifaces) {
+  
+  ifaces[dev].forEach(function(details){
+    if (details.family=='IPv4'  && details.address!=="127.0.0.1") {
+   let newchild=document.createElement("li");
+   newchild.innerText=dev+"=>"+details.address;
+   document.getElementById("ip4").appendChild(newchild);
+    }
+  });
+}
+    server();
   </script>
 </body>
 
